@@ -1,4 +1,5 @@
 <?php
+    require_once '../config/auth.php';
     require_once '../models/games.php';
     $game = new Game();
 

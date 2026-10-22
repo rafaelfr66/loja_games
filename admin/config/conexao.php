@@ -14,7 +14,6 @@ try {
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo 'Banco conectado com sucesso!';
 
 } catch (PDOException $e) {
     echo 'Erro! Não foi possível conectar ao banco. Erro: ' . $e->getMessage();
