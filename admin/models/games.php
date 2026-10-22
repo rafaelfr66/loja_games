@@ -20,12 +20,12 @@ class Game
 
         if (!empty($atrib)) {
             $this->id = $atrib['id'] ?? null;
-            $this->titulo = $atrib['titulo'];
-            $this->descricao = $atrib['descricao'];
-            $this->preco = $atrib['preco'];
-            $this->estoque = $atrib['estoque'];
-            $this->categoria = $atrib['categoria'];
-            $this->imagem = $atrib['imagem'];
+            $this->titulo = $atrib['titulo'] ?? null;
+            $this->descricao = $atrib['descricao'] ?? null;
+            $this->preco = $atrib['preco'] ?? null;
+            $this->estoque = $atrib['estoque'] ?? null;
+            $this->categoria = $atrib['categoria'] ?? null;
+            $this->imagem = $atrib['imagem'] ?? null;
         }
     }
 

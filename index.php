@@ -14,148 +14,128 @@
     <title>Loja Games</title>
     <link rel="stylesheet" href="admin/public/css/style.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
+        .destaque {
+            background-color: var(--marinho-claro);
+            color: var(--branco);
+            text-align: center;
+            padding: 40px 20px;
         }
-        .topo {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
+        .destaque h2 {
+            color: var(--branco);
+            font-size: 30px;
+            margin: 0 0 8px;
+        }
+        .destaque p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.75);
+        }
+        .titulo-secao {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            align-items: baseline;
+            border-bottom: 2px solid var(--borda);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
         }
-        .topo h1 {
+        .titulo-secao h2 {
             margin: 0;
-            font-size: 26px;
+            text-align: left;
+            font-size: 22px;
         }
-        .topo form {
-            display: flex;
-            gap: 10px;
-        }
-        .topo input {
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            width: 220px;
-        }
-        .topo button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #0056b3;
-            color: white;
-            cursor: pointer;
-        }
-        .topo button:hover,
-        .topo .btn-admin:hover {
-            background-color: #004085;
-        }
-        .topo .acoes {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .topo .ola {
-            align-self: center;
+        .titulo-secao span {
+            color: var(--texto-suave);
             font-size: 14px;
-        }
-        .topo .btn-admin {
-            padding: 8px 15px;
-            border-radius: 5px;
-            background-color: #0056b3;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .conteudo {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
         }
         .vitrine {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
         }
         .card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--branco);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(20, 33, 61, 0.08);
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(20, 33, 61, 0.15);
         }
         .card img,
         .card .sem-imagem {
             width: 100%;
-            height: 160px;
+            height: 170px;
             object-fit: cover;
             border-radius: 0;
         }
         .card .sem-imagem {
-            background-color: #ddd;
-            color: #888;
-            font-size: 48px;
+            background: linear-gradient(135deg, var(--marinho), var(--vinho));
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .card .info {
-            padding: 15px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             gap: 8px;
             flex: 1;
         }
+        .categoria {
+            color: var(--vinho);
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
         .card h3 {
             margin: 0;
             font-size: 18px;
-        }
-        .categoria {
-            align-self: flex-start;
-            background-color: #e7f1ff;
-            color: #007bff;
-            font-size: 12px;
-            padding: 3px 8px;
-            border-radius: 10px;
+            color: var(--marinho);
         }
         .card p {
             margin: 0;
-            color: #555;
+            color: var(--texto-suave);
             font-size: 14px;
+            line-height: 1.4;
             flex: 1;
+        }
+        .card .rodape-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--borda);
+            padding-top: 12px;
+            margin-top: 5px;
         }
         .preco {
             font-size: 20px;
             font-weight: bold;
-            color: #28a745;
+            color: var(--marinho);
         }
         .estoque {
-            font-size: 13px;
-            color: #888;
+            font-size: 12px;
+            color: var(--texto-suave);
         }
         .esgotado {
-            color: #dc3545;
+            color: var(--erro);
+            font-weight: bold;
         }
         .vazio {
             text-align: center;
-            color: #888;
-        }
-        .rodape {
-            text-align: center;
-            color: #888;
-            font-size: 13px;
-            padding: 20px;
+            color: var(--texto-suave);
+            padding: 40px 0;
         }
     </style>
 </head>
 <body>
     <div class="topo">
-        <h1>&#127918; Loja Games</h1>
+        <a class="logo" href="index.php">Loja <span>Games</span></a>
         <div class="acoes">
             <form method="GET" action="">
                 <input type="text" name="buscar" placeholder="Buscar por nome..."
@@ -165,17 +145,27 @@
             <?php if (isset($_SESSION['usuario_id'])): ?>
                 <span class="ola">Olá, <?= htmlspecialchars($_SESSION['usuario_nome']) ?></span>
                 <?php if ($_SESSION['usuario_tipo'] === 'admin'): ?>
-                    <a class="btn-admin" href="admin/views/ver_games.php">Gerenciar Games</a>
+                    <a class="btn btn-contorno" href="admin/views/ver_games.php">Gerenciar Games</a>
                 <?php endif; ?>
-                <a class="btn-admin" href="logout.php">Sair</a>
+                <a class="btn btn-contorno" href="logout.php">Sair</a>
             <?php else: ?>
-                <a class="btn-admin" href="login.php">Entrar</a>
+                <a class="btn btn-contorno" href="login.php">Entrar</a>
             <?php endif; ?>
         </div>
     </div>
 
+    <?php if (!$nome): ?>
+        <div class="destaque">
+            <h2>Os melhores jogos estão aqui</h2>
+            <p>Confira nosso catálogo e encontre seu próximo game.</p>
+        </div>
+    <?php endif; ?>
+
     <div class="conteudo">
-        <h2><?= $nome ? 'Resultados para "' . htmlspecialchars($nome) . '"' : 'Nossos Jogos' ?></h2>
+        <div class="titulo-secao">
+            <h2><?= $nome ? 'Resultados para "' . htmlspecialchars($nome) . '"' : 'Nossos Jogos' ?></h2>
+            <span><?= count($games) ?> jogo(s)</span>
+        </div>
 
         <?php if (count($games) > 0): ?>
             <div class="vitrine">
@@ -192,12 +182,14 @@
                             <span class="categoria"><?= htmlspecialchars($g['categoria']) ?></span>
                             <h3><?= htmlspecialchars($g['titulo']) ?></h3>
                             <p><?= htmlspecialchars($g['descricao']) ?></p>
-                            <span class="preco">R$ <?= number_format($g['preco'], 2, ',', '.') ?></span>
-                            <?php if ($g['estoque'] > 0): ?>
-                                <span class="estoque"><?= $g['estoque'] ?> em estoque</span>
-                            <?php else: ?>
-                                <span class="estoque esgotado">Esgotado</span>
-                            <?php endif; ?>
+                            <div class="rodape-card">
+                                <span class="preco">R$ <?= number_format($g['preco'], 2, ',', '.') ?></span>
+                                <?php if ($g['estoque'] > 0): ?>
+                                    <span class="estoque"><?= $g['estoque'] ?> em estoque</span>
+                                <?php else: ?>
+                                    <span class="estoque esgotado">Esgotado</span>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

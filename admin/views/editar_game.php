@@ -1,4 +1,5 @@
 <?php
+require_once '../config/auth.php';
 require_once '../models/games.php';
 
 $game = new Game();
@@ -32,84 +33,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Jogo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Jogo - Loja Games</title>
     <link rel="stylesheet" href="../public/css/style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        a {
-            margin-left: 15px;
-            text-decoration: none;
-            color: #007bff;
-        }
-        a:hover {
-            text-decoration: underline;
+        .imagem-atual {
+            margin: 0 0 18px;
+            color: var(--texto-suave);
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h2>Editar Jogo</h2>
+    <div class="topo">
+        <a class="logo" href="../../index.php">Loja <span>Games</span></a>
+        <div class="acoes">
+            <a class="btn btn-contorno" href="ver_games.php">Gerenciar Games</a>
+        </div>
+    </div>
 
-    <?php if ($dados): ?>
-        <form method="POST">
-            <input type="hidden" name="id" value="<?= $dados['id'] ?>">
+    <div class="conteudo">
+        <div class="formulario">
+            <h2>Editar Jogo</h2>
 
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo" value="<?= $dados['titulo'] ?>" required>
+            <?php if ($dados): ?>
+                <form method="POST">
+                    <input type="hidden" name="id" value="<?= $dados['id'] ?>">
 
-            <label for="descricao">Descrição:</label>
-            <textarea name="descricao" rows="4" required><?= $dados['descricao'] ?></textarea>
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" value="<?= $dados['titulo'] ?>" required>
 
-            <label for="preco">Preço:</label>
-            <input type="number" step="0.01" name="preco" value="<?= $dados['preco'] ?>" required>
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="4" required><?= $dados['descricao'] ?></textarea>
 
-            <label for="estoque">Estoque:</label>
-            <input type="number" name="estoque" value="<?= $dados['estoque'] ?>" required>
+                    <div class="linha">
+                        <div>
+                            <label for="preco">Preço (R$)</label>
+                            <input type="number" step="0.01" id="preco" name="preco" value="<?= $dados['preco'] ?>" required>
+                        </div>
+                        <div>
+                            <label for="estoque">Estoque</label>
+                            <input type="number" id="estoque" name="estoque" value="<?= $dados['estoque'] ?>" required>
+                        </div>
+                    </div>
 
-            <label for="categoria">Categoria:</label>
-            <input type="text" name="categoria" value="<?= $dados['categoria'] ?>" required>
+                    <label for="categoria">Categoria</label>
+                    <input type="text" id="categoria" name="categoria" value="<?= $dados['categoria'] ?>" required>
 
-            <label>Imagem atual:</label>
-            <p><?= $dados['imagem'] ?></p>
-            <input type="hidden" name="imagem" value="<?= $dados['imagem'] ?>">
+                    <label>Imagem atual</label>
+                    <p class="imagem-atual"><?= $dados['imagem'] ?></p>
+                    <input type="hidden" name="imagem" value="<?= $dados['imagem'] ?>">
 
-            <button type="submit">Salvar</button>
-            <a href="ver_games.php">Cancelar</a>
-        </form>
-    <?php else: ?>
-        <p>Jogo não encontrado.</p>
-    <?php endif; ?>
+                    <div class="botoes">
+                        <button type="submit">Salvar</button>
+                        <a href="ver_games.php">Cancelar</a>
+                    </div>
+                </form>
+            <?php else: ?>
+                <p>Jogo não encontrado.</p>
+            <?php endif; ?>
+        </div>
+    </div>
 </body>
 </html>

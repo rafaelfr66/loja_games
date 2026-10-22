@@ -1,4 +1,5 @@
 <?php
+require_once '../config/auth.php';
 require_once '../models/games.php';
 
 $mensagem = '';
@@ -33,54 +34,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Jogo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Jogo - Loja Games</title>
     <link rel="stylesheet" href="../public/css/style.css">
     <style>
         .mensagem {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
-            border-radius: 5px;
             display: none;
         }
     </style>
 </head>
 <body>
-    <h2>Cadastrar Novo Jogo</h2>
+    <div class="topo">
+        <a class="logo" href="../../index.php">Loja <span>Games</span></a>
+        <div class="acoes">
+            <a class="btn btn-contorno" href="ver_games.php">Gerenciar Games</a>
+        </div>
+    </div>
 
-    <?php if ($mensagem === 'sucesso'): ?>
-        <div class="mensagem" id="mensagem">Jogo cadastrado com sucesso!</div>
-        <script>
-            document.getElementById('mensagem').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('mensagem').style.display = 'none';
-            }, 3000);
-        </script>
-    <?php endif; ?>
+    <div class="conteudo">
+        <div class="formulario">
+            <h2>Cadastrar Novo Jogo</h2>
 
-    <form method="POST" enctype="multipart/form-data">
-        <label for="titulo">Título:</label><br>
-        <input type="text" name="titulo" required><br><br>
+            <?php if ($mensagem === 'sucesso'): ?>
+                <div class="mensagem alerta-sucesso" id="mensagem">Jogo cadastrado com sucesso!</div>
+                <script>
+                    document.getElementById('mensagem').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('mensagem').style.display = 'none';
+                    }, 3000);
+                </script>
+            <?php endif; ?>
 
-        <label for="descricao">Descrição:</label><br>
-        <textarea name="descricao" rows="4" required></textarea><br><br>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" required>
 
-        <label for="preco">Preço:</label><br>
-        <input type="number" step="0.01" name="preco" required><br><br>
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao" rows="4" required></textarea>
 
-        <label for="estoque">Estoque:</label><br>
-        <input type="number" name="estoque" required><br><br>
+                <div class="linha">
+                    <div>
+                        <label for="preco">Preço (R$)</label>
+                        <input type="number" step="0.01" id="preco" name="preco" required>
+                    </div>
+                    <div>
+                        <label for="estoque">Estoque</label>
+                        <input type="number" id="estoque" name="estoque" required>
+                    </div>
+                </div>
 
-        <label for="categoria">Categoria:</label><br>
-        <input type="text" name="categoria" required><br><br>
+                <label for="categoria">Categoria</label>
+                <input type="text" id="categoria" name="categoria" required>
 
-        <label for="imagem">Imagem:</label><br>
-        <input type="file" name="imagem" accept="image/*" required><br><br>
+                <label for="imagem">Imagem</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*" required>
 
-        <button type="submit">Cadastrar</button>
-        <a href="ver_games.php">Voltar</a>
-    </form>
+                <div class="botoes">
+                    <button type="submit">Cadastrar</button>
+                    <a href="ver_games.php">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

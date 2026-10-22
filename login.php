@@ -39,74 +39,81 @@
     <link rel="stylesheet" href="admin/public/css/style.css">
     <style>
         body {
-            margin: 0;
-            padding: 20px;
             min-height: 100vh;
-            box-sizing: border-box;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(135deg, var(--marinho) 0%, var(--marinho-claro) 60%, var(--vinho) 100%);
         }
         .caixa-login {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            background-color: var(--branco);
+            border-radius: 10px;
+            border-top: 5px solid var(--vinho);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            padding: 35px 30px;
             width: 100%;
-            max-width: 340px;
+            max-width: 360px;
         }
-        .caixa-login h2 {
-            margin-top: 0;
-            color: #007bff;
+        .caixa-login .logo {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--marinho);
+            margin-bottom: 5px;
+        }
+        .caixa-login .logo span {
+            color: var(--vinho);
+        }
+        .caixa-login .subtitulo {
+            text-align: center;
+            color: var(--texto-suave);
+            font-size: 14px;
+            margin: 0 0 25px;
         }
         .caixa-login label {
             display: block;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--marinho);
+            margin-bottom: 6px;
         }
         .caixa-login input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
         .caixa-login button {
             width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .caixa-login button:hover {
-            background-color: #0056b3;
+            padding: 11px;
+            font-size: 15px;
         }
         .erro {
-            background-color: #f8d7da;
-            color: #dc3545;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: var(--erro-fundo);
+            color: var(--erro);
+            border-left: 4px solid var(--erro);
+            padding: 10px 12px;
+            border-radius: 4px;
             font-size: 14px;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
         .voltar {
             display: block;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 18px;
             font-size: 14px;
-            color: #007bff;
             text-decoration: none;
+        }
+        .voltar:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="caixa-login">
-        <h2>&#127918; Entrar</h2>
+        <div class="logo">Loja <span>Games</span></div>
+        <p class="subtitulo">Entre com sua conta</p>
 
         <?php if ($erro): ?>
             <div class="erro"><?= $erro ?></div>
